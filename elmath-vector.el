@@ -1,0 +1,21 @@
+(require 'seq)
+(defun V+ (a b) (seq-mapn #'+ a b)) ;; Used like (V+ '(1 3 5) '(2 4 6))
+(defun Vneg (a) (seq-map (lambda (x) (- 0 x)) v))
+(defun V- (a b) (V+ a (Vneg b)))
+(defun V/ (v a) (seq-map (lambda (x) (/ x a)) v)) ;; Used like (V/ '(1 3.0 5.0) 2) -> (0, 1.5, 2.5)
+(defun V* (a v) (seq-map (lambda (x) (* x a)) v)) 
+(defun V. (a b) (+ (seq-map #'* a b)))
+(defun .x (x) (car x))
+(defun .y (x) (cadr x))
+(defun .z (x) (caddr x))
+(defun !! (l n) (seq-elt l n)) ;; Used like (!! '(2 3 4) 1)
+(defun Vx (a b)
+  (list
+    (- (* (.y a) (.z b)) (* (.z a) (.y b)))
+    (- (* (.z a) (.x b)) (* (.x a) (.z b)))
+    (- (* (.x a) (.y b)) (* (.y a) (.x b)))
+  )
+)
+
+(provide 'elmath-vector)
+
