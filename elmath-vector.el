@@ -4,7 +4,7 @@
 (defun V- (a b) (V+ a (Vneg b)))
 (defun V/ (v a) (seq-map (lambda (x) (/ x a)) v)) ;; Used like (V/ '(1 3.0 5.0) 2) -> (0, 1.5, 2.5)
 (defun V* (a v) (seq-map (lambda (x) (* x a)) v)) 
-(defun V. (a b) (+ (seq-map #'* a b)))
+(defun V. (a b) (seq-reduce #'+ (seq-mapn #'* a b) 0))
 (defun .x (x) (car x))
 (defun .y (x) (cadr x))
 (defun .z (x) (caddr x))
